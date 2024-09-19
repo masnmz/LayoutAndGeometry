@@ -11,22 +11,23 @@ struct ContentView: View {
     let colors: [Color] = [.red, .green, .blue, .orange, .pink, .purple, .yellow]
     
     var body: some View {
-        GeometryReader { fullview in
-        ScrollView {
-                ForEach( 0..<50) { index in
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 0) {
+                ForEach(1..<20) { number in
                     GeometryReader { proxy in
-                        Text("Row #\(index)")
-                            .font(.title)
-                            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
-                            .background(colors[index % 7])
+                        Text("Number \(number)")
+                            .font(.largeTitle)
+                            .padding()
+                            .background(.red)
                             .rotation3DEffect(
-                                .degrees(proxy.frame(in: .global).minY - fullview.size.height / 2) / 5,
-                                axis: (x: 0, y: 1, z: 0)
+                                .degrees(-proxy.frame(in: .global).minX / 8),
+                                axis: (x: 0.0, y: 1.0, z: 0.0)
                             )
+                            .frame(width: 200, height: 200)
                     }
-                    .frame(height: 40)
+                    .frame(width: 200, height: 200)
                 }
-                }
+            }
         }
     }
 }
